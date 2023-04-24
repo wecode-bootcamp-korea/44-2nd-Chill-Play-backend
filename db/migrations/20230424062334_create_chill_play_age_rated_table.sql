@@ -2,7 +2,7 @@
 CREATE TABLE age_rated
 (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  rated VARCHAR(50) NOT NULL UNIQUE
+  rated INT NOT NULL UNIQUE
 );
 
 -- migrate:down

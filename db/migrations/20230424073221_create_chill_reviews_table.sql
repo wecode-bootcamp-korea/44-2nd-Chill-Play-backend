@@ -7,11 +7,11 @@ CREATE TABLE reviews
     user_id  INT NOT NULL,
     musical_id INT NOT NULL,
     order_id INT NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY(user_id) REFERENCES users(id),
-    FOREIGN KEY(musical_id) REFERENCES musicals(id),
-    FOREIGN KEY(order_id) REFERENCES orders(id)
+    CONSTRAINT FK_reviews_user_id FOREIGN KEY(user_id) REFERENCES users(id),
+    CONSTRAINT FK_reviews_musical_id  FOREIGN KEY(musical_id) REFERENCES musicals(id),
+    CONSTRAINT FK_reviews_order_id FOREIGN KEY(order_id) REFERENCES orders(id)
 );
 
 -- migrate:down

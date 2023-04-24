@@ -8,10 +8,10 @@ CREATE TABLE booked_seats
     theater_id INT NOT NULL,
     seat_class_id INT NOT NULL,
     order_id INT NOT NULL,
-    FOREIGN KEY(musical_id) REFERENCES musicals(id),
-    FOREIGN KEY(theater_id) REFERENCES theaters(id),
-    FOREIGN KEY(seat_class_id) REFERENCES seat_class(id),
-    FOREIGN KEY(order_id) REFERENCES orders(id)
+    CONSTRAINT FK_booked_seats_musical_id FOREIGN KEY(musical_id) REFERENCES musicals(id),
+    CONSTRAINT FK_booked_seats_theater_id FOREIGN KEY(theater_id) REFERENCES theaters(id),
+    CONSTRAINT FK_booked_seats_seat_class_id FOREIGN KEY(seat_class_id) REFERENCES seat_class(id),
+    CONSTRAINT FK_booked_seats_order_id FOREIGN KEY(order_id) REFERENCES orders(id)
 );
 
 -- migrate:down

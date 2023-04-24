@@ -11,9 +11,9 @@ CREATE TABLE musicals
     age_rated_id INT NOT NULL,
     boarding_status_id INT NOT NULL,
     theater_id INT NOT NULL,
-    FOREIGN KEY(age_rated_id) REFERENCES age_rated(id),
-    FOREIGN KEY(boarding_status_id) REFERENCES boarding_status(id),
-    FOREIGN KEY(theater_id) REFERENCES theaters(id)
+   CONSTRAINT FK_musicals_age_rated_id FOREIGN KEY(age_rated_id) REFERENCES age_rated(id),
+   CONSTRAINT FK_musicals_boarding_status_id FOREIGN KEY(boarding_status_id) REFERENCES boarding_status(id),
+   CONSTRAINT FK_musicals_theater_id FOREIGN KEY(theater_id) REFERENCES theaters(id)
 );
 
 

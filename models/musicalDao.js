@@ -47,6 +47,31 @@ const getAllMusicalList = async (sort, where) => {
   }
 };
 
+const searchMusicalByName = async (keyword, limit, offset) => {
+  try {
+    const matchingMusicals = await appDataSource.query(
+      `SELECT
+        musicals.id,
+        musicals.name,
+        musicals.post_image_url,
+        musicals.released_date,
+        musicals.age_rated_id
+       FROM musicals
+       JOIN age_rated ON musicals.age_rated_id = age_rated.id
+       WHERE musicals.name LIKE '%${keyword}%'
+       LIMIT ? OFFSET ?
+       `,[limit, offset]
+    );
+    if (!matchingMusicals.length) {
+      throw new CustomError('404', 'NOT_FOUND');
+    }
+    return matchingMusicals;
+  } catch (err) {
+    throw new CustomError('404', 'NOT_FOUND');
+  }
+};
+
 module.exports = {
   getAllMusicalList,
-};
+  searchMusicalByName,
+}

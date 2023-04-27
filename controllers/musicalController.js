@@ -1,12 +1,12 @@
 const musicalService = require('../services/musicalService');
 const { catchAsync } = require('../utils/error');
 
-const musicalList = catchAsync(async (req, res) => {
-  const { sort, where, limit = 8, offset = 0 } = req.query;
-  const musicalList = await musicalService.musicalList(sort, where, parseInt(limit), parseInt(offset));
+const getAllMusicalList = catchAsync(async (req, res) => {
+  const { order, where } = req.query;
+  const musicalList = await musicalService.getAllMusicalList(order, where);
   return res.status(200).json(musicalList);
 });
 
 module.exports = {
-  musicalList,
+  getAllMusicalList,
 };

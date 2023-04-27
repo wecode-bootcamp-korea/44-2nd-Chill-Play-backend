@@ -3,7 +3,7 @@ const musicalController = require('../controllers/musicalController');
 
 const router = express.Router();
 
-router.get('', musicalController.musicalList);
+router.get('', musicalController.getAllMusicalList);
 
 module.exports = {
   router,

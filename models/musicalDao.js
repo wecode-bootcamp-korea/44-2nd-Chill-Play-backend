@@ -1,7 +1,7 @@
 const appDataSource = require('./appDataSource');
 const { CustomError } = require('../utils/error');
 
-const musicalList = async (sort, where, limit, offset) => {
+const getAllMusicalList = async (sort, where) => {
   try {
     const sortList = {
       releasedDateASC: 'musicals.released_date ASC',
@@ -14,14 +14,15 @@ const musicalList = async (sort, where, limit, offset) => {
 
     const whereList = {
       comingsoon: 'musicals.released_date > DATE_SUB(NOW(), INTERVAL 0 DAY)',
+      comingsoon: 'musicals.released_date > DATE_SUB(NOW(), INTERVAL 0 DAY)',
     };
 
-    const sortCondition = sortList[sort] || 'musicals.released_date';
+    const sortCondition = sortList[sort] || 'reservationRate DESC';
     const whereCondition = whereList[where] || 'musicals.released_date';
 
     return await appDataSource.query(
       `SELECT
-      musicals.id as Id,
+      musicals.id as musicalId,
       ROUND(COALESCE(
         (SELECT SUM(sold_seat)
          FROM daily_sales_count
@@ -33,20 +34,18 @@ const musicalList = async (sort, where, limit, offset) => {
          JOIN musical_schedules ON musical_schedules.id = daily_sales_count.musical_schedule_id
          JOIN musical_date ON musical_date.id = musical_schedules.musical_date_id
          WHERE musical_date.date >= NOW()) * 100, 0),1) as reservationRate,
-      musicals.name as name,
+      musicals.name as musicalName,
       musicals.post_image_url as postImageUrl,
       musicals.released_date as releasedDate,
       musicals.end_date as endDate,
-      age_rated.rated as rated,
+      age_rated.rated as ageRated,
       musical_actors.actors as actors
       FROM musicals
       JOIN age_rated ON musicals.age_rated_id = age_rated.id
       JOIN musical_actors ON musical_actors.musical_id = musicals.id
       WHERE ${whereCondition} and musicals.end_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)
       ORDER BY ${sortCondition}
-      LIMIT ? OFFSET ? 
-      `,
-      [limit, offset]
+      `
     );
   } catch {
     throw new CustomError(400, 'DATABASE_ERROR');
@@ -54,5 +53,5 @@ const musicalList = async (sort, where, limit, offset) => {
 };
 
 module.exports = {
-  musicalList,
+  getAllMusicalList,
 };

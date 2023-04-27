@@ -1,77 +1,73 @@
 class ConditionMake {
-  constructor(musical, theater, date, releasedDate, endDate, ageRate, reservationRate) {
+  constructor(musical = '', theater = '', date = '', sortingWay = '', sort = '') {
     this.musical = musical;
     this.theater = theater;
     this.date = date;
-    this.releasedDate = releasedDate;
-    this.endDate = endDate;
-    this.ageRate = ageRate;
-    this.rerservationRate = reservationRate;
     this.condition = [];
+    this.sortingWay = sortingWay;
+    this.sort = sort;
     this.filter = ``;
   }
 
-  // reservationRate: 'reservationRate DESC',
-  // releasedDateASC: 'musicals.released_date',
-  // releasedDateDESC: 'musicals.released_date DESC',
-  // endDateASC: 'musicals.end_date',
-  // endDateDESC: 'musicals.end_date DESC',
-  // ageRateASC: 'musicals.age_rated_id',
-
   musicalCondition() {
-    if (this.musical) this.condition.push(`m.id = ${this.musical}`);
+    if (this.musical) {
+      if (typeof this.musical === 'string') {
+        this.condition.push(`${this.musical}`);
+      } else if (typeof this.musical === 'number') {
+        this.condition.push(`m.id = ${this.musical}`);
+      }
+    }
   }
 
   theaterCondition() {
     if (this.theater) {
-      this.condition.push(`t.id = ${this.theater}`);
-    } else if (this.musical) {
-      this.condition.push(`mt.musical_id = ${this.musical}`);
+      if (typeof this.theater === 'string') {
+        this.condition.push(`${this.theater}`);
+      } else if (typeof this.theater === 'number') {
+        this.condition.push(`t.id = ${this.theater}`);
+      }
     }
   }
 
   dateCondition() {
-    if (this.date) this.condition.push(`md.date = '${this.date}'`);
-  }
-
-  releasedDate() {
-    if (this.releasedDate) {
-      this.condition.push(`${this.releasedDate}`);
+    if (this.date) {
+      if (typeof this.date === 'string' && /\d{4}-\d{2}-\d{2}/.test(this.date)) {
+        this.condition.push(`md.date = '${this.date}'`);
+      } else {
+        this.condition.push(`${this.date}`);
+      }
     }
   }
 
-  endDate() {
-    if (this.endDate) {
-      this.condition.push(`${this.endDate}`);
-    }
-  }
-
-  ageRate() {
-    if (this.ageRate) {
-      this.condition.push(`${this.ageRate}`);
-    }
-  }
-
-  reservationRate() {
-    if (this.rerservationRate) {
-      this.condition.psuh(`${this.reservationRate}`);
+  sortingWayRateCondition() {
+    if (this.sortingWay) {
+      this.condition.push(`${this.sortingWay}`);
     }
   }
 
   mixCondition() {
-    if (this.condition.length !== 0) this.filter = ` WHERE ${this.condition.join(` AND `)}`;
+    if (this.sort === 'order') {
+      if (this.condition.length > 1) {
+        const conditions = this.condition.join(`,  `);
+        this.filter += ` ORDER BY ${conditions}`;
+      } else if (this.condition.length === 1) {
+        this.filter += ` ORDER BY ${this.condition[0]}`;
+      }
+    } else if (this.sort === 'where') {
+      if (this.condition.length > 1) {
+        const conditions = this.condition.join(` AND `);
+        this.filter += ` WHERE ${conditions}`;
+      } else if (this.condition.length === 1) {
+        this.filter += ` WHERE ${this.condition[0]}`;
+      }
+    }
   }
-
-  mixOrderCondition() {
-    if (this.condition.length !== 0) this.filter = ` ORDER BY ${this.condition.join(` , `)}`;
-  }
-
   build() {
     this.musicalCondition();
     this.theaterCondition();
     this.dateCondition();
+    this.sortingWayRateCondition();
     this.mixCondition();
-    this.mixOrderCondition();
     return this.filter;
   }
 }

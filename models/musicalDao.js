@@ -1,23 +1,18 @@
 const appDataSource = require('./appDataSource');
 const { CustomError } = require('../utils/error');
+const ConditionMake = require('./conditionMake');
 
 const getAllMusicalList = async (sort, where) => {
   try {
-    const sortList = {
-      releasedDateASC: 'musicals.released_date ASC',
-      releasedDateDESC: 'musicals.released_date DESC',
-      endDateASC: 'musicals.end_date ASC',
-      endDateDESC: 'musicals.end_date DESC',
-      ageRateASC: 'musicals.age_rated_id ASC',
-      reservationRate: 'reservationRate DESC',
-    };
+    let bc = sort.split('-');
+    let result = bc[0] + ' ' + bc[1];
+    let condition = new ConditionMake(null, null, null, result, 'order');
+    let versity = condition.build();
 
     const whereList = {
       comingsoon: 'musicals.released_date > DATE_SUB(NOW(), INTERVAL 0 DAY)',
-      comingsoon: 'musicals.released_date > DATE_SUB(NOW(), INTERVAL 0 DAY)',
     };
 
-    const sortCondition = sortList[sort] || 'reservationRate DESC';
     const whereCondition = whereList[where] || 'musicals.released_date';
 
     return await appDataSource.query(
@@ -33,7 +28,7 @@ const getAllMusicalList = async (sort, where) => {
          FROM daily_sales_count
          JOIN musical_schedules ON musical_schedules.id = daily_sales_count.musical_schedule_id
          JOIN musical_date ON musical_date.id = musical_schedules.musical_date_id
-         WHERE musical_date.date >= NOW()) * 100, 0),1) as reservationRate,
+         WHERE musical_date.date >= NOW()) * 100, 0),1) as reservationRated,
       musicals.name as musicalName,
       musicals.post_image_url as postImageUrl,
       musicals.released_date as releasedDate,
@@ -44,7 +39,7 @@ const getAllMusicalList = async (sort, where) => {
       JOIN age_rated ON musicals.age_rated_id = age_rated.id
       JOIN musical_actors ON musical_actors.musical_id = musicals.id
       WHERE ${whereCondition} and musicals.end_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)
-      ORDER BY ${sortCondition}
+      ${versity}
       `
     );
   } catch {

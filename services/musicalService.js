@@ -1,7 +1,7 @@
 const musicalDao = require('../models/musicalDao');
 
-const getAllMusicalList = async (order, where) => {
-  return await musicalDao.getAllMusicalList(order, where);
+const getAllMusicalList = async (sort, where) => {
+  return await musicalDao.getAllMusicalList(sort, where);
 };
 
 module.exports = {

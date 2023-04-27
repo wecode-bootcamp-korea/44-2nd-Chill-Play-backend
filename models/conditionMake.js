@@ -8,7 +8,6 @@ class ConditionMake {
     this.sort = sort;
     this.filter = ``;
   }
-
   musicalCondition() {
     if (this.musical) {
       if (typeof this.musical === 'string') {
@@ -44,6 +43,11 @@ class ConditionMake {
       this.condition.push(`${this.sortingWay}`);
     }
   }
+  sort() {
+    if (this.sort) {
+      this.condition.push(`${this.sort}`);
+    }
+  }
 
   mixCondition() {
     if (this.sort === 'order') {
@@ -72,3 +76,10 @@ class ConditionMake {
   }
 }
 module.exports = ConditionMake;
+
+
+
+
+
+
+

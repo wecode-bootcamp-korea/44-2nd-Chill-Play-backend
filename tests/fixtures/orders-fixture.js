@@ -1,20 +1,15 @@
 const dataSource = require('../../models/appDataSource');
 
-const createOrders = (orderList) => {
-  let data = [];
-
-  for (const order of orderList) {
-    data.push([
-      order.id,
-      order.personnel,
-      order.total_amount,
-      order.user_id,
-      order.musical_id,
-      order.musical_schedule_id,
-      order.order_status_id,
-    ]);
-  }
-
+const createOrders = async (orderList) => {
+  const data = orderList.map((order)=> [
+    order.id,
+    order.personnel,
+    order.total_amount,
+    order.user_id,
+    order.musical_id,
+    order.musical_schedule_id,
+    order.order_status_id,
+  ]) 
   return dataSource.query(
     `
     INSERT INTO orders (
@@ -31,20 +26,16 @@ const createOrders = (orderList) => {
   );
 };
 
-const createBookedSeats = (bookedSeatList) => {
-  let data = [];
-
-  for (const bookedSeat of bookedSeatList) {
-    data.push([
-      bookedSeat.id,
-      bookedSeat.seat_row,
-      bookedSeat.seat_column,
-      bookedSeat.musical_id,
-      bookedSeat.theater_id,
-      bookedSeat.seat_class_id,
-      bookedSeat.order_id,
-    ]);
-  }
+const createBookedSeats = async (bookedSeatList) => {
+  const data = bookedSeatList.map((bookedSeat)=> [
+    bookedSeat.id,
+    bookedSeat.seat_row,
+    bookedSeat.seat_column,
+    bookedSeat.musical_id,
+    bookedSeat.theater_id,
+    bookedSeat.seat_class_id,
+    bookedSeat.order_id,
+  ])
 
   return dataSource.query(
     `

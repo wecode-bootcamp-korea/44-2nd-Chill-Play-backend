@@ -104,6 +104,9 @@ const removeReview = async (userId, reviewId) => {
     );
 
     if (removeReview.affectedRows != 1) throw new CustomError(400, 'dataSource_Error');
+   
+    await queryRunner.commitTransaction();
+
   } catch (err) {
     await queryRunner.rollbackTransaction();
     throw new CustomError(400, 'dataSource_Error');

@@ -35,7 +35,6 @@ const getMusicalList = async (musicalId, theaterId, date) => {
     if (musicalId) {
       let condition = new ConditionMake(musicalId, null, null, null, 'where');
       let versity = condition.build();
-
       theaterLists = await appDataSource.query(
         `SELECT
           t.id  AS theaterId,

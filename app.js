@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 
+const router = require('./routes');
 const { globalErrorHandler } = require('./utils/error');
 
 const createApp = () => {
@@ -12,6 +13,8 @@ const createApp = () => {
   app.use(cors());
   app.use(express.json());
   app.use(morgan('combined'));
+  app.use(router);
+  app.use(globalErrorHandler);
 
   app.get('/ping', function (req, res, next) {
     res.status(200).json({ message: 'pong' });
@@ -22,8 +25,6 @@ const createApp = () => {
     err.statusCode = 404;
     next(err);
   });
-
-  app.use(globalErrorHandler);
 
   return app;
 };

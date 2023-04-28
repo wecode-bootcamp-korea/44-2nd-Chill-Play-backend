@@ -38,7 +38,9 @@ const kakaoLogin = async (kakaoAccessToken) => {
     user = await userDao.getUserByKakaoId(kakaoId);
   }
 
-  return createAccessToken(user.id);
+  const token = createAccessToken(user.id);
+  const userNickname = user.profileNickname;
+  return [token, userNickname];
 };
 
 module.exports = {

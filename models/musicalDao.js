@@ -4,8 +4,7 @@ const ConditionMake = require('./conditionMake');
 
 const getAllMusicalList = async (sort, where) => {
   try {
-    let bc = sort.split('-');
-    let result = bc[0] + ' ' + bc[1];
+    const result = sort.replace('-', ' ');
     let condition = new ConditionMake(null, null, null, result, 'order');
     let versity = condition.build();
 

@@ -4,6 +4,7 @@ const { CustomError } = require('../utils/error');
 const getAllMusicalList = async (sort, where) => {
   return await musicalDao.getAllMusicalList(sort, where);
 };
+
 const searchMusicalByName = async (keyword, limit, offset) => {
   return await musicalDao.searchMusicalByName(keyword, limit, offset);
 };

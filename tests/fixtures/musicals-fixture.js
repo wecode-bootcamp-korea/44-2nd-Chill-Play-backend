@@ -48,19 +48,19 @@ const createMusicals = (musicalList) => {
 
   return dataSource.query(
     `
-      INSERT INTO musicals (
-        id,
-        descriptions,
-        name,
-        post_image_url,
-        released_date,
-        end_date,
-        running_time,
-        synopsis,
-        age_rated_id,
-        boarding_status_id,
-        theater_id
-      ) VALUES ?
+    INSERT INTO musicals (
+      id,
+      descriptions,
+      name,
+      post_image_url,
+      released_date,
+      end_date,
+      running_time,
+      synopsis,
+      age_rated_id,
+      boarding_status_id,
+      theater_id
+    ) VALUES ?
     `,
     [data]
   );
@@ -79,12 +79,12 @@ const createMusicalActor = (actorList) => {
 
   return dataSource.query(
     `
-        INSERT INTO musical_actors (
-            id,
-            musical_id,
-            actors
-        ) VALUES ?
-      `,
+    INSERT INTO musical_actors (
+      id,
+      musical_id,
+      actors
+    ) VALUES ?
+    `,
     [data]
   );
 };
@@ -98,12 +98,12 @@ const createMusicalDetailImage = (imageList) => {
 
   return dataSource.query(
     `
-          INSERT INTO musical_detail_images (
-            id,
-            image_url,
-            musical_id
-          ) VALUES ?
-        `,
+    INSERT INTO musical_detail_images (
+      id,
+      image_url,
+      musical_id
+    ) VALUES ?
+    `,
     [data]
   );
 };
@@ -117,10 +117,10 @@ const createMusicalDate = (dateList) => {
 
   return dataSource.query(
     `INSERT INTO musical_date (
-              id,
-              date
-            ) VALUES ?
-          `,
+      id,
+      date
+    ) VALUES ?
+    `,
     [data]
   );
 };
@@ -134,10 +134,10 @@ const createMusicalTime = (timeList) => {
 
   return dataSource.query(
     `INSERT INTO musical_time (
-              id,
-              time
-            ) VALUES ?
-          `,
+      id,
+      time
+    ) VALUES ?
+    `,
     [data]
   );
 };
@@ -157,13 +157,13 @@ const createMusicalSchedules = (scheduleList) => {
 
   return dataSource.query(
     `INSERT INTO musical_schedules (
-        id,
-        musical_id,
-        theater_id,
-        musical_time_id,
-        musical_date_id
-              ) VALUES ?
-            `,
+      id,
+      musical_id,
+      theater_id,
+      musical_time_id,
+      musical_date_id
+      ) VALUES ?
+    `,
     [data]
   );
 };
@@ -182,12 +182,12 @@ const createDailySalesCount = (dailySalesCountList) => {
 
   return dataSource.query(
     `INSERT INTO daily_sales_count (
-        id,
-        sold_seat,
-        musical_id,
-        musical_schedule_id
-                ) VALUES ?
-              `,
+      id,
+      sold_seat,
+      musical_id,
+      musical_schedule_id
+      ) VALUES ?
+    `,
     [data]
   );
 };

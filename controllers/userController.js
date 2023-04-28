@@ -6,8 +6,9 @@ const kakaoLogin = catchAsync(async (req, res) => {
 
   if (!kakaoAccessToken) throw new CustomError(400, 'KEY_ERROR');
 
-  const token = await userService.kakaoLogin(kakaoAccessToken);
-  return res.status(200).json({ token: token });
+  const userNicknameAndToken = await userService.kakaoLogin(kakaoAccessToken);
+
+  return res.status(200).json({ token: userNicknameAndToken[0], nickname: userNicknameAndToken[1] });
 });
 
 module.exports = {

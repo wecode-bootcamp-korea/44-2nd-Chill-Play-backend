@@ -7,6 +7,17 @@ const getAllMusicalList = catchAsync(async (req, res) => {
   return res.status(200).json(musicalList);
 });
 
+const searchMusicalByName = catchAsync(async (req, res) => {
+  const { keyword, limit, offset } = req.query;
+
+  const searchMusicalByName = await musicalService.searchMusicalByName(keyword, parseInt(limit),parseInt(offset));
+
+  return res.status(200).json(searchMusicalByName);
+});
+
 module.exports = {
   getAllMusicalList,
-};
+  searchMusicalByName,
+}
+
+

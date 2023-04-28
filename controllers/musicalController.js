@@ -10,8 +10,6 @@ const getAllMusicalList = catchAsync(async (req, res) => {
 const searchMusicalByName = catchAsync(async (req, res) => {
   const { keyword, limit, offset } = req.query;
 
-  console.log(req);
-
   const searchMusicalByName = await musicalService.searchMusicalByName(
     keyword,
     parseInt(limit),

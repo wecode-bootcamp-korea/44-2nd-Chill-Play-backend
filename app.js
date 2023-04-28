@@ -3,8 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-
 const router = require('./routes');
+
 const { globalErrorHandler } = require('./utils/error');
 
 const createApp = () => {

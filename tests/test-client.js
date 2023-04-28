@@ -1,13 +1,13 @@
-const dataSource = require("../models/appDataSource");
+const dataSource = require('../models/appDataSource');
 
 const truncateTables = async (tableList) => {
-  await dataSource.query(`SET FOREIGN_KEY_CHECKS=0`)
+  await dataSource.query(`SET FOREIGN_KEY_CHECKS=0`);
 
   for (let table of tableList) {
     await dataSource.query(`TRUNCATE table ${table}`);
   }
 
-  await dataSource.query(`SET FOREIGN_KEY_CHECKS=1`)
-}
+  await dataSource.query(`SET FOREIGN_KEY_CHECKS=1`);
+};
 
-module.exports = { truncateTables }
+module.exports = { truncateTables };

@@ -10,14 +10,22 @@ const getAllMusicalList = catchAsync(async (req, res) => {
 const searchMusicalByName = catchAsync(async (req, res) => {
   const { keyword, limit, offset } = req.query;
 
-  const searchMusicalByName = await musicalService.searchMusicalByName(keyword, parseInt(limit),parseInt(offset));
+  console.log(req);
+
+  const searchMusicalByName = await musicalService.searchMusicalByName(
+    keyword,
+    parseInt(limit),
+    parseInt(offset)
+  );
 
   return res.status(200).json(searchMusicalByName);
 });
 
-module.exports = {
-  getAllMusicalList,
-  searchMusicalByName,
-}
+const getMusicalDetail = catchAsync(async (req, res) => {
+  const { musicalId } = req.params;
 
+  const result = await musicalService.getMusicalDetail(musicalId);
+  return res.status(200).json(result);
+});
 
+module.exports = { getMusicalDetail, getAllMusicalList, searchMusicalByName };

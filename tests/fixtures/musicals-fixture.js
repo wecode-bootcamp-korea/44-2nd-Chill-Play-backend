@@ -1,15 +1,21 @@
-const dataSource = require("../../models/appDataSource");
+const dataSource = require('../../models/appDataSource');
 
 const createTheaters = (theaterList) => {
   let data = [];
 
   for (const theater of theaterList) {
-    data.push([theater.id, theater.name, theater.totalSeats, theater.cityId, theater.thumbnailImageUrl]);
+    data.push([
+      theater.id,
+      theater.name,
+      theater.totalSeats,
+      theater.cityId,
+      theater.thumbnailImageUrl,
+    ]);
   }
 
   return dataSource.query(
     `
-    INSERT INTO theaters (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    INSERT INTO theaters (
       id,
       name,
       total_seats,
@@ -140,7 +146,13 @@ const createMusicalSchedules = (scheduleList) => {
   let data = [];
 
   for (const schedule of scheduleList) {
-    data.push([schedule.id, schedule.musicalId, schedule.theaterId, schedule.musicalTimeId, schedule.musicalDateId]);
+    data.push([
+      schedule.id,
+      schedule.musicalId,
+      schedule.theaterId,
+      schedule.musicalTimeId,
+      schedule.musicalDateId,
+    ]);
   }
 
   return dataSource.query(
@@ -178,63 +190,6 @@ const createDailySalesCount = (dailySalesCountList) => {
               `,
     [data]
   );
-};
-const theaterSample = {
-  id: 1,
-  name: "극장",
-  cityId: 1,
-  thumbnailImageUrl: "thumbnailImageUrl",
-};
-
-const musicalsSample = {
-  id: 1,
-  descriptions: "설명",
-  name: "뮤지컬이름",
-  postImageUrl: "postImageUrl",
-  releasedDate: "2023-04-28",
-  endDate: "2023-05-01",
-  runningTime: 180,
-  synopsis: "시놉시스",
-  ageRatedId: 1,
-  boardingStatusId: 1,
-  theaterId: 1,
-};
-
-const musicalDetailImageSample = {
-  id: 1,
-  imageUrl: "imageUrl",
-  musicalId: 1,
-};
-
-const actorList = {
-  id: 1,
-  musicalId: 1,
-  actors: "배우1,배우2,배우3",
-};
-
-const musicalDateSample = {
-  id: 1,
-  date: "2023-04-28",
-};
-
-const musicalTimeSample = {
-  id: 1,
-  time: "19:00",
-};
-
-const musicalScheduleSample = {
-  id: 1,
-  musicalId: 1,
-  theaterId: 1,
-  musicalTimeId: 1,
-  musicalDateId: 1,
-};
-
-const dailySalesCountSample = {
-  id: 1,
-  soldSeat: 4,
-  musicalId: 1,
-  musicalScheduleId: 1,
 };
 
 module.exports = {

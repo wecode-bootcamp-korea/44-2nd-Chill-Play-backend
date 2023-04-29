@@ -94,6 +94,25 @@ const createOrder = async (totalAmount, userId, musicalId, seatArray, musicalSch
   }
 };
 
+const checkOrder = async (userId, musicalId, orderStatusId) => {
+  try {
+    const [result] = await appDataSource.query(
+      `SELECT 
+            orders.musical_id,
+            orders.user_id ,
+            order_status.status
+            FROM orders 
+            JOIN order_status ON orders.order_status_id  = order_status.id 
+            WHERE orders.user_id  = ? AND orders.musical_id = ? AND orders.order_status_id =?`,
+      [userId, musicalId, orderStatusId]
+    );
+    return result;
+  } catch (err) {
+    throw new CustomError(400, 'dataSource_Error');
+  }
+};
+
 module.exports = {
   createOrder,
+  checkOrder,
 };

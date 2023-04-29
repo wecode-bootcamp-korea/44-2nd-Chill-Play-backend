@@ -5,7 +5,6 @@ const createUsers = (userList) => {
 
   for (const user of userList) {
     data.push([
-      user.id,
       user.kakao_id,
       user.account_email,
       user.profile_image,
@@ -19,7 +18,6 @@ const createUsers = (userList) => {
   return dataSource.query(
     `
     INSERT INTO users (
-      id,
       kakao_id,
       account_email,
       profile_image,

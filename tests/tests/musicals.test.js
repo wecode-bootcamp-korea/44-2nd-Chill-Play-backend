@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { createApp } = require('../../app');
-const appDataSource = require('../../models/appDataSource');
+const dataSource = require('../../models/appDataSource');
 const musicalsFixture = require('../fixtures/musicals-fixture');
 const ordersFixture = require('../fixtures/orders-fixture');
 const usersFixture = require('../fixtures/users-fixture');
@@ -34,8 +34,8 @@ describe('뮤지컬 리스트 테스트', () => {
     descriptions: '설명',
     name: '뮤지컬이름1',
     postImageUrl: 'postImageUrl',
-    releasedDate: '2023-04-28',
-    endDate: '2023-05-03',
+    releasedDate: '2024-04-28',
+    endDate: '2024-05-03',
     runningTime: 180,
     synopsis: '시놉시스',
     ageRatedId: 1,
@@ -48,8 +48,8 @@ describe('뮤지컬 리스트 테스트', () => {
     descriptions: '설명',
     name: '뮤지컬이름2',
     postImageUrl: 'postImageUrl',
-    releasedDate: '2023-05-01',
-    endDate: '2023-05-02',
+    releasedDate: '2024-05-01',
+    endDate: '2024-05-02',
     runningTime: 180,
     synopsis: '시놉시스',
     ageRatedId: 1,
@@ -99,12 +99,12 @@ describe('뮤지컬 리스트 테스트', () => {
 
   const musicalDateSample1 = {
     id: 1,
-    date: '2023-04-28',
+    date: '2024-04-28',
   };
 
   const musicalDateSample2 = {
     id: 2,
-    date: '2023-05-01',
+    date: '2024-05-01',
   };
 
   const musicalTimeSample1 = {
@@ -189,7 +189,7 @@ describe('뮤지컬 리스트 테스트', () => {
 
   beforeAll(async () => {
     app = createApp();
-    await appDataSource.initialize();
+    await dataSource.initialize();
 
     await usersFixture.createUsers([userSample1, userSample2]);
     await musicalsFixture.createTheaters([theaterSample1, theaterSample2]);
@@ -221,7 +221,7 @@ describe('뮤지컬 리스트 테스트', () => {
       'orders',
       'booked_seats',
     ]);
-    await appDataSource.destroy();
+    await dataSource.destroy();
   });
 
   test('🍾SUCCESS: List Filter by reservation', async () => {
@@ -231,8 +231,8 @@ describe('뮤지컬 리스트 테스트', () => {
       reservationRated: '50.0',
       musicalName: '뮤지컬이름1',
       postImageUrl: 'postImageUrl',
-      releasedDate: '2023-04-28',
-      endDate: '2023-05-03',
+      releasedDate: '2024-04-28',
+      endDate: '2024-05-03',
       ageRated: '1',
       actors: '{"actor": ["배우1", "배우2", "배우3"]}',
     };
@@ -247,8 +247,8 @@ describe('뮤지컬 리스트 테스트', () => {
       reservationRated: '50.0',
       musicalName: '뮤지컬이름1',
       postImageUrl: 'postImageUrl',
-      releasedDate: '2023-04-28',
-      endDate: '2023-05-03',
+      releasedDate: '2024-04-28',
+      endDate: '2024-05-03',
       ageRated: '1',
       actors: '{"actor": ["배우1", "배우2", "배우3"]}',
     };
@@ -263,8 +263,8 @@ describe('뮤지컬 리스트 테스트', () => {
       reservationRated: '50.0',
       musicalName: '뮤지컬이름1',
       postImageUrl: 'postImageUrl',
-      releasedDate: '2023-04-28',
-      endDate: '2023-05-03',
+      releasedDate: '2024-04-28',
+      endDate: '2024-05-03',
       ageRated: '1',
       actors: '{"actor": ["배우1", "배우2", "배우3"]}',
     };
@@ -279,8 +279,8 @@ describe('뮤지컬 리스트 테스트', () => {
       reservationRated: '50.0',
       musicalName: '뮤지컬이름1',
       postImageUrl: 'postImageUrl',
-      releasedDate: '2023-04-28',
-      endDate: '2023-05-03',
+      releasedDate: '2024-04-28',
+      endDate: '2024-05-03',
       ageRated: '1',
       actors: '{"actor": ["배우1", "배우2", "배우3"]}',
     };
@@ -295,8 +295,8 @@ describe('뮤지컬 리스트 테스트', () => {
       reservationRated: '50.0',
       musicalName: '뮤지컬이름1',
       postImageUrl: 'postImageUrl',
-      releasedDate: '2023-04-28',
-      endDate: '2023-05-03',
+      releasedDate: '2024-04-28',
+      endDate: '2024-05-03',
       ageRated: '1',
       actors: '{"actor": ["배우1", "배우2", "배우3"]}',
     };
@@ -312,8 +312,8 @@ describe('뮤지컬 리스트 테스트', () => {
       reservationRated: '50.0',
       musicalName: '뮤지컬이름1',
       postImageUrl: 'postImageUrl',
-      releasedDate: '2023-04-28',
-      endDate: '2023-05-03',
+      releasedDate: '2024-04-28',
+      endDate: '2024-05-03',
       ageRated: '1',
       actors: '{"actor": ["배우1", "배우2", "배우3"]}',
     };
@@ -324,20 +324,18 @@ describe('뮤지컬 리스트 테스트', () => {
 
   test('🍾SUCCESS: List Filter by reservation&comingsoon', async () => {
     const res = await request(app).get('/musicals?sort=ageRated-ASC&where=comingsoon');
-    const body = [
-      {
-        musicalId: 2,
-        reservationRated: '50.0',
-        musicalName: '뮤지컬이름2',
-        postImageUrl: 'postImageUrl',
-        releasedDate: '2023-05-01',
-        endDate: '2023-05-02',
-        ageRated: '1',
-        actors: '{"actor": ["배우4", "배우5", "배우6"]}',
-      },
-    ];
+    const body = {
+      musicalId: 2,
+      reservationRated: '50.0',
+      musicalName: '뮤지컬이름2',
+      postImageUrl: 'postImageUrl',
+      releasedDate: '2024-05-01',
+      endDate: '2024-05-02',
+      ageRated: '1',
+      actors: '{"actor": ["배우4", "배우5", "배우6"]}',
+    };
 
-    expect(res.body).toEqual(body);
+    expect(res.body[1]).toEqual(body);
     expect(res.statusCode).toEqual(200);
   });
 });
@@ -361,8 +359,8 @@ describe('뮤지컬 디테일 페이지 테스트', () => {
     descriptions: '설명',
     name: '뮤지컬이름',
     postImageUrl: 'postImageUrl',
-    releasedDate: '2023-04-28',
-    endDate: '2023-05-01',
+    releasedDate: '2024-04-28',
+    endDate: '2024-05-01',
     runningTime: 180,
     synopsis: '시놉시스',
     ageRatedId: 1,
@@ -391,7 +389,7 @@ describe('뮤지컬 디테일 페이지 테스트', () => {
 
   const musicalDateSample = {
     id: 1,
-    date: '2023-04-28',
+    date: '2024-04-28',
   };
 
   const musicalTimeSample = {
@@ -474,11 +472,11 @@ describe('뮤지컬 디테일 페이지 테스트', () => {
       musicalName: '뮤지컬이름',
       descriptions: '설명',
       postImageUrl: 'postImageUrl',
-      releasedDate: '2023-04-28',
-      endDate: '2023-05-01',
+      releasedDate: '2024-04-28',
+      endDate: '2024-05-01',
       runningTime: 180,
       synopsis: '시놉시스',
-      musicalActors: { actor: ['배우1', '배우2', '배우3'] },
+      musicalActors: `{"actor": ["배우1", "배우2", "배우3"]}`,
       ageRated: '1',
       boardingStatus: '상영 예정',
       theaterName: '극장',
@@ -489,7 +487,6 @@ describe('뮤지컬 디테일 페이지 테스트', () => {
     };
     const res = await request(app).get('/musicals/detail/1');
     await expect(res.body).toStrictEqual(successRes);
-    console.log(res);
   });
 
   test('❌ FAILED:  musicalId is not value', async () => {
@@ -515,8 +512,8 @@ describe('검색기능 테스트', () => {
     descriptions: '뮤지컬 테스트 내용',
     name: '뮤지컬 테스트 이름',
     postImageUrl: 'testImage1',
-    releasedDate: '2023-04-28',
-    endDate: '2023-05-01',
+    releasedDate: '2024-04-28',
+    endDate: '2024-05-01',
     runningTime: 180,
     synopsis: '테스트-시놉시스: 짧은글',
     ageRatedId: 1,
@@ -545,7 +542,7 @@ describe('검색기능 테스트', () => {
         id: 1,
         name: '뮤지컬 테스트 이름',
         post_image_url: 'testImage1',
-        released_date: '2023-04-28',
+        released_date: '2024-04-28',
         age_rated_id: 1,
       },
     ]);

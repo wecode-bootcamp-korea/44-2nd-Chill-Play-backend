@@ -20,6 +20,7 @@ const createApp = () => {
     res.status(200).json({ message: 'pong' });
   });
 
+
   app.all('*', (req, res, next) => {
     const err = new Error(`Can't find ${req.originalUrl} on this server!`);
     err.statusCode = 404;

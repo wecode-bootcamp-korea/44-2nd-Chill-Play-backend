@@ -63,7 +63,6 @@ const searchMusicalByName = async (keyword, limit, offset) => {
       [limit, offset]
     );
     if (!matchingMusicals.length) {
-      console.log(err);
       throw new CustomError('404', 'NOT_FOUND');
     }
     return matchingMusicals;
@@ -84,7 +83,6 @@ const checkMusicalId = async (musicalId) => {
     );
     return result;
   } catch (err) {
-    console.log(err);
     throw new CustomError(400, 'dataSource_Error');
   }
 };

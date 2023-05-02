@@ -1,6 +1,6 @@
 const appDataSource = require('./appDataSource');
 const { CustomError } = require('../utils/error');
-const { seatStatusEnum } = require('../middlewares/enums');
+const { seatStatusEnum } = require('../middlewares/enum');
 
 const getSeats = async (musicalScheduleId) => {
   try {

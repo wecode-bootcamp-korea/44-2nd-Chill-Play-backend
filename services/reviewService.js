@@ -2,7 +2,7 @@ const reviewDao = require('../models/reviewDao');
 const orderDao = require('../models/orderDao');
 const { CustomError } = require('../utils/error');
 const { timeForToday } = require('../utils/dateCalculation');
-const { OrderStatusEnum } = require('../models/eum');
+const { OrderStatusEnum } = require('../models/enum');
 
 const getReviewsAndAveragePoint = async (musicalId, limit, offset) => {
   const [getReviewsByMusicalId, getAverageReviewScore] = await Promise.all([

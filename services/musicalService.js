@@ -29,4 +29,8 @@ const getMusicalDetail = async (musicalId) => {
   return getMusicalDetail;
 };
 
-module.exports = { getMusicalDetail, getAllMusicalList, searchMusicalByName };
+module.exports = {
+  getMusicalDetail,
+  getAllMusicalList,
+  searchMusicalByName,
+};

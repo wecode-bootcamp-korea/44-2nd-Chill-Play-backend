@@ -45,7 +45,7 @@ const getMusicalList = async (musicalId, theaterId, date) => {
         ${versity}
         `,
         [versity]
-      ); 
+      );
     }
 
     let timeLists = [];
@@ -53,15 +53,17 @@ const getMusicalList = async (musicalId, theaterId, date) => {
       condition = new ConditionMake(musicalId, theaterId, `${date}`, null, 'where');
       versity = condition.build();
       const orderVersity = new CustomConditionMake(['md.date', 'mt.time']).buildOrderBy();
-   
+
       const today = new Date();
-      const targetDate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+      const targetDate = `${today.getFullYear()}-${(today.getMonth() + 1)
+        .toString()
+        .padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
       let con = '';
 
       if (targetDate === date) {
         con = ' AND mt.time >= CURTIME()';
       }
-      
+
       timeLists = await appDataSource.query(
         `SELECT
           ms.id AS musicalScheduleId, 		
@@ -88,10 +90,10 @@ const getMusicalList = async (musicalId, theaterId, date) => {
         ${versity} ${con}
         ${orderVersity}
         `,
-        [versity, con ,orderVersity]
+        [versity, con, orderVersity]
       );
     }
-  
+
     const results = [];
     if (musicalLists.length) {
       results.push(musicalLists);
@@ -105,16 +107,10 @@ const getMusicalList = async (musicalId, theaterId, date) => {
 
     return results;
   } catch (err) {
-    console.log(err);
-    throw new CustomError(500, 'FILTER_ERROR'); 
+    throw new CustomError(400, 'appDataSource_error');
   }
 };
 
 module.exports = {
   getMusicalList,
 };
-
-
-
-
-

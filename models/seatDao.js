@@ -52,8 +52,7 @@ const getSeats = async (musicalScheduleId) => {
 
     return [{ bookedSeats: soldSeats, vipPrice: vipPrice, regPrice: regularPrice }];
   } catch (err) {
-    console.log(err);
-    throw new CustomError(500, 'FILTER_ERROR');
+    throw new CustomError(400, 'appDataSource_error');
   }
 };
 

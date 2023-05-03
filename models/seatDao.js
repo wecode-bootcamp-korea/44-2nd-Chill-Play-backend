@@ -1,6 +1,6 @@
 const appDataSource = require('./appDataSource');
 const { CustomError } = require('../utils/error');
-const { seatStatusEnum } = require('../middlewares/enum');
+const { SeatClass } = require('./enum');
 
 const getSeats = async (musicalScheduleId) => {
   try {
@@ -24,8 +24,8 @@ const getSeats = async (musicalScheduleId) => {
       soldSeats = totalSeat.map((seat) => seat.seatRow + seat.seatColumn);
     }
   
-    const vip = seatStatusEnum.VIP;
-    const vipPrice = (
+    const vip = SeatClass.VIP;
+    let vipPrice = (
       await appDataSource.query(
         `SELECT
          price
@@ -35,9 +35,9 @@ const getSeats = async (musicalScheduleId) => {
       )
     )[0].price;
 
-    const regular = seatStatusEnum.REGULAR;
+    const regular = SeatClass.REGULAR;
 
-    const regularPrice = (
+    let regularPrice = (
       await appDataSource.query(
         `SELECT
          price
@@ -46,6 +46,14 @@ const getSeats = async (musicalScheduleId) => {
         [regular]
       )
     )[0].price;
+        
+      
+
+    vipPrice = parseFloat(vipPrice)
+    regularPrice = parseFloat(regularPrice)
+
+    console.log(typeof vipPrice)    
+    console.log(typeof regularPrice)   
 
      return [{bookedSeats: soldSeats ,vipPrice: vipPrice , regPrice: regularPrice }]
 

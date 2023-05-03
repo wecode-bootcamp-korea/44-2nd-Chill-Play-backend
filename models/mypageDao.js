@@ -14,7 +14,7 @@ const getOrderInfo = async (userId, limit) => {
       musical_date.date as musicalDate,
       musical_time.time as startTime,
       (musical_time.time + INTERVAL musicals.running_time MINUTE) AS endTime,
-      seatinfo.seatInfo as seatInfo,
+      seatInfo.seatInfo as seatInfo,
       theaters.name as theatersName,
       age_rated.rated as ageLimit,
       orders.created_at as orderTime,
@@ -44,6 +44,7 @@ const getOrderInfo = async (userId, limit) => {
 
     return result;
   } catch (err) {
+    console.log(err);
     throw new CustomError(400, 'appDataSource_error');
   }
 };

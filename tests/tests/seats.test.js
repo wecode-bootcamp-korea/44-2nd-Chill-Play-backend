@@ -2,9 +2,9 @@ const request = require('supertest');
 const { truncateTables } = require('../test-client');
 const { createApp } = require('../../app');
 const appDataSource = require('../../models/appDataSource');
-const musicalsFixture = require('../fixtures/musical-fixture');
+const musicalsFixture = require('../fixtures/musicals-fixture');
 const orderFixture = require('../fixtures/orders-fixture');
-const userFixture = require('../fixtures/users-fixture')
+const userFixture = require('../fixtures/users-fixture');
 
 describe('관 예매 페이지', () => {
   let app;
@@ -219,7 +219,6 @@ describe('관 예매 페이지', () => {
       bookedSeatsSample2,
       bookedSeatsSample3,
     ]);
-    
   });
 
   afterAll(async () => {
@@ -232,7 +231,7 @@ describe('관 예매 페이지', () => {
       'musical_schedules',
       'daily_sales_count',
       'booked_seats',
-      'orders'
+      'orders',
     ]);
     await appDataSource.destroy();
   });
@@ -241,13 +240,11 @@ describe('관 예매 페이지', () => {
     app = createApp();
     const res = await request(app).get('/seat/3');
     const body = [
-      
-        {
-          bookedSeats: ['A1', 'A2', 'A3'],
-          vipPrice: '180000.000',
-          regPrice: '100000.000',
-        },
-      
+      {
+        bookedSeats: ['A1', 'A2', 'A3'],
+        vipPrice: '180000.000',
+        regPrice: '100000.000',
+      },
     ];
     expect(res.body).toEqual(body);
   });

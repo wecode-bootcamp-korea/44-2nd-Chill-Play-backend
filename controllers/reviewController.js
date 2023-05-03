@@ -34,8 +34,7 @@ const removeReview = catchAsync(async (req, res) => {
 
   await reviewService.removeReview(userId, reviewId);
 
-  return res.status(200).json({ message: 'SUCCESS REMOVE REVIEW' });
-  3;
+  return res.status(204).json();
 });
 
 const isMusicalOrder = catchAsync(async (req, res) => {

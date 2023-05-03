@@ -28,7 +28,6 @@ const getOrderInfo = async (userId, limit) => {
     JOIN musical_date ON musical_date.id = musical_schedules.musical_date_id
     JOIN musical_time ON musical_time.id = musical_schedules.musical_time_id
     JOIN age_rated ON age_rated.id = musicals.age_rated_id
-    JOIN musical_end_time on musical_end_time.id = musical_schedules.musical_endtime_id
     	JOIN(
     		SELECT
     			booked_seats.order_id,
@@ -45,8 +44,7 @@ const getOrderInfo = async (userId, limit) => {
 
     return result;
   } catch (err) {
-    console.log(err)
-    throw new CustomError(404, 'NOT_FOUND');
+    throw new CustomError(400, 'appDataSource_error');
   }
 };
 

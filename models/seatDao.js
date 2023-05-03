@@ -17,13 +17,13 @@ const getSeats = async (musicalScheduleId) => {
       [musicalScheduleId]
     );
     const totalSeat = Array.isArray(seats) ? seats : [seats];
-    
+
     let soldSeats = [];
 
-    if(totalSeat.length > 0 ){
+    if (totalSeat.length > 0) {
       soldSeats = totalSeat.map((seat) => seat.seatRow + seat.seatColumn);
     }
-  
+
     const vip = SeatClass.VIP;
     let vipPrice = (
       await appDataSource.query(
@@ -46,27 +46,17 @@ const getSeats = async (musicalScheduleId) => {
         [regular]
       )
     )[0].price;
-        
-      
 
-    vipPrice = parseFloat(vipPrice)
-    regularPrice = parseFloat(regularPrice)
+    vipPrice = parseFloat(vipPrice);
+    regularPrice = parseFloat(regularPrice);
 
-    console.log(typeof vipPrice)    
-    console.log(typeof regularPrice)   
-
-     return [{bookedSeats: soldSeats ,vipPrice: vipPrice , regPrice: regularPrice }]
-
+    return [{ bookedSeats: soldSeats, vipPrice: vipPrice, regPrice: regularPrice }];
   } catch (err) {
-    console.log(err)
+    console.log(err);
     throw new CustomError(500, 'FILTER_ERROR');
   }
 };
 
-
-
 module.exports = {
   getSeats,
 };
-
-

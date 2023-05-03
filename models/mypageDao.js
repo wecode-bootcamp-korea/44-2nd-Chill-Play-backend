@@ -45,7 +45,7 @@ const getOrderInfo = async (userId, limit) => {
 
     return result;
   } catch (err) {
-    console.log(err)
+    console.log(err);
     throw new CustomError(404, 'NOT_FOUND');
   }
 };

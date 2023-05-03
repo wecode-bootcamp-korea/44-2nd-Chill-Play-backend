@@ -1,6 +1,6 @@
 const appDataSource = require('./appDataSource');
 const { CustomError } = require('../utils/error');
-const { seatStatusEnum } = require('../middlewares/enum');
+const { SeatClass } = require('./enum');
 
 const getSeats = async (musicalScheduleId) => {
   try {
@@ -17,15 +17,15 @@ const getSeats = async (musicalScheduleId) => {
       [musicalScheduleId]
     );
     const totalSeat = Array.isArray(seats) ? seats : [seats];
-    
+
     let soldSeats = [];
 
-    if(totalSeat.length > 0 ){
+    if (totalSeat.length > 0) {
       soldSeats = totalSeat.map((seat) => seat.seatRow + seat.seatColumn);
     }
-  
-    const vip = seatStatusEnum.VIP;
-    const vipPrice = (
+
+    const vip = SeatClass.VIP;
+    let vipPrice = (
       await appDataSource.query(
         `SELECT
          price
@@ -35,9 +35,9 @@ const getSeats = async (musicalScheduleId) => {
       )
     )[0].price;
 
-    const regular = seatStatusEnum.REGULAR;
+    const regular = SeatClass.REGULAR;
 
-    const regularPrice = (
+    let regularPrice = (
       await appDataSource.query(
         `SELECT
          price
@@ -47,18 +47,16 @@ const getSeats = async (musicalScheduleId) => {
       )
     )[0].price;
 
-     return [{bookedSeats: soldSeats ,vipPrice: vipPrice , regPrice: regularPrice }]
+    vipPrice = parseFloat(vipPrice);
+    regularPrice = parseFloat(regularPrice);
 
+    return [{ bookedSeats: soldSeats, vipPrice: vipPrice, regPrice: regularPrice }];
   } catch (err) {
-    console.log(err)
+    console.log(err);
     throw new CustomError(500, 'FILTER_ERROR');
   }
 };
 
-
-
 module.exports = {
   getSeats,
 };
-
-

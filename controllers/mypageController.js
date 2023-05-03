@@ -6,7 +6,7 @@ const getOrderInfo = catchAsync(async (req, res) => {
   const userId = req.user.id;
   const profileImage = req.user.profileImage;
 
-  const inquireOrderInfo = await mypageService.inquireOrderInfo(userId, profileImage, parseInt(limit));
+  const inquireOrderInfo = await mypageService.getOrderInfo(userId, profileImage, parseInt(limit));
   return res.status(200).json(inquireOrderInfo);
 });
 

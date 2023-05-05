@@ -68,6 +68,11 @@
 
 ## 회원가입/로그인
 ![login](https://user-images.githubusercontent.com/123074891/236431888-e2b89c1a-64f3-40b4-99d8-8b1ec0ea0c87.gif)
+<br>
+**카카오 소셜 로그인 API 활용**
+
+프론트가 인가 토큰에 대한 통신 이후 인가 토큰을 백엔드에게 전달하여 백엔드에서 카카오와 통신하여 유저정보를 받음 <br>
+카카오에서 전달받은 유저 정보는 USER 테이블에 데이터가 존재하지 않는다면 DB 내에 저장하고, 저장되어 있는 유저는 바로 JWT 토큰을 발급
 
 ## 랜딩페이지
 ![main](https://user-images.githubusercontent.com/123074891/236431916-9672f987-55ff-4a23-85ef-1a074909b401.gif)

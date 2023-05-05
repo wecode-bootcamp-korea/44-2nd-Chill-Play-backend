@@ -49,8 +49,19 @@
   <br>
 </div>
 
+
+## About 'muse'
+![image](https://user-images.githubusercontent.com/123849268/236437851-da1ea13f-79b3-4d12-8044-3212fcf81553.png)
+<br>뮤지컬은 대중적으로 많은 사람들이 관심을 가지고 있는 예술의 한 분야입니다. 관람객의 오감을 자극하고 힐링과 영감을 준다는 의미에서
+저희 웹서비스를 '뮤즈'라고 지었습니다. <br>'뮤즈'를 통해 인기 있는 작품을 추천받고, 빠르고 간편한 절차를 통해 뮤지컬을 예매할 수 있습니다.
+
+
+
+
+
 ## ERD
 
+![image](https://user-images.githubusercontent.com/123849268/236438043-f323ade7-e21d-441e-abfa-16f7db312717.png)
 
 
 

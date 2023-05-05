@@ -56,23 +56,25 @@
 
 
 ## 회원가입/로그인
-
-
-
+![login](https://user-images.githubusercontent.com/123074891/236431888-e2b89c1a-64f3-40b4-99d8-8b1ec0ea0c87.gif)
 
 ## 랜딩페이지
-
+![main](https://user-images.githubusercontent.com/123074891/236431916-9672f987-55ff-4a23-85ef-1a074909b401.gif)
 
 ## 뮤지컬 리스트 페이지
+![Muse-List](https://user-images.githubusercontent.com/123074891/236431942-f78fc10d-af27-4f39-b0b4-48d8f946fd93.gif)
 
 ## 뮤지컬 디테일 페이지
+![Muse-detail-min](https://user-images.githubusercontent.com/123074891/236437178-a47d8a5d-90d7-4bb5-9c15-331614c80b05.gif)
 
-## 예매페이지
-
-## 좌석 선택페이지
+## 예매페이지, 좌석 선택페이지
+![Muse-booking](https://user-images.githubusercontent.com/123074891/236432842-8707f250-90d0-4089-ab00-fbdc530d1825.gif)
 
 ## 결제 페이지
+![결제](https://user-images.githubusercontent.com/123074891/236432154-ffaf3225-9d09-4f20-a6cf-0da73f671057.gif)
 
 ## MY페이지
+![마이페이지 해상도 수정](https://user-images.githubusercontent.com/123074891/236436456-07c52dc8-f0f2-4af1-a2e6-e95a6bb0bff9.gif)
 
 ## 사진리뷰
+![review](https://user-images.githubusercontent.com/123074891/236432405-32d068d2-237d-45e8-a0a7-b9878eec194d.gif)

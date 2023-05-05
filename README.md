@@ -77,6 +77,10 @@
 ## 랜딩페이지
 ![main](https://user-images.githubusercontent.com/123074891/236431916-9672f987-55ff-4a23-85ef-1a074909b401.gif)
 
+## 네비게이션
+![Nav-min](https://user-images.githubusercontent.com/123074891/236439607-d7bc5137-cf34-46d0-ad68-68fc3a8413a9.gif)
+
+
 ## 뮤지컬 리스트 페이지
 ![Muse-List](https://user-images.githubusercontent.com/123074891/236431942-f78fc10d-af27-4f39-b0b4-48d8f946fd93.gif)
 
